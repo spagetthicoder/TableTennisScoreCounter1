@@ -55,9 +55,9 @@
                     android:id="@+id/sets_a_score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
                     android:text="0"
                     android:textColor="#000000"
                     android:textSize="20sp" />
@@ -66,12 +66,20 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
+                android:layout_marginTop="4dp"
                 android:onClick="plus"
                 android:text="+ POINT" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="4dp"
+                android:onClick="foul"
+                android:text="+ Foul" />
 
 
         </LinearLayout>
@@ -128,9 +136,9 @@
                     android:id="@+id/sets_b_score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_horizontal"
-                    android:layout_marginTop="2dp"
                     android:text="0"
                     android:textColor="#000000"
                     android:textSize="20sp" />
@@ -139,11 +147,20 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
+                android:layout_marginTop="4dp"
                 android:onClick="plusb"
-                android:text="+ 3 POINTS" />
+                android:text="+ POINT" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="4dp"
+                android:onClick="foulb"
+                android:text="+ Foul" />
 
 
         </LinearLayout>
@@ -153,10 +170,10 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/tabletennis"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="130dp"/>
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/tabletennis" />
 
     <Button
         android:layout_width="wrap_content"
