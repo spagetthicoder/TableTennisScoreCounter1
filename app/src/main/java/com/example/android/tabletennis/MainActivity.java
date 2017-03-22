@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         setTeamBView.setText(String.valueOf(setTeamB));
     }
 
+    public void displayForFoulA(boolean foulColor){
+        TextView setFoulA = (TextView) findViewById(R.id.set_a_foul);
+        setFoulA.setTextColor(this.getResources().getColor(R.color.red));
+    }
+
     // The 'plus' method increases the score for Team A appropriately and checks if Team A already won the game
     // If Team A won the game the game points for Team A and Team B are reset to 0 and Set value for Team A increased with 1
     public void plus(View view) {
@@ -56,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             setTeamB = setTeamB + 1;
             displayForTeamA(scoreTeamA);
             displayForTeamB(scoreTeamB);
-            displayForTeamB(setTeamB);
-        } else if (scoreTeamA < 11 || (scoreTeamA - scoreTeamB)<=1) {
+            displayForSetB(setTeamB);
+        } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB)<=1) ) {
             scoreTeamA = scoreTeamA + 1;
             displayForTeamA(scoreTeamA);
         }
@@ -80,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
             setTeamA = setTeamA + 1;
             displayForTeamA(scoreTeamA);
             displayForTeamB(scoreTeamB);
-            displayForTeamA(setTeamA);
-        }  else if (scoreTeamB < 11 || (scoreTeamB-scoreTeamA) <= 1) {
+            displayForSetA(setTeamA);
+        }  else if (scoreTeamB < 11 || ((scoreTeamB-scoreTeamA) <= 1 )) {
             scoreTeamB = scoreTeamB + 1;
             displayForTeamB(scoreTeamB);
         }
@@ -97,5 +102,10 @@ public class MainActivity extends AppCompatActivity {
         displayForTeamB(scoreTeamB);
         displayForSetA(setTeamA);
         displayForSetB(setTeamB);
+    }
+
+    public void foula(View view){
+        boolean foulColor = true;
+        displayForFoulA(foulColor);
     }
 }
