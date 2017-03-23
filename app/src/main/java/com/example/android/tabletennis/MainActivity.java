@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     int scoreTeamB = 0;
     int setTeamA = 0;
     int setTeamB = 0;
+    int foulCounter = 0;
+    int foulCounterB = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +43,24 @@ public class MainActivity extends AppCompatActivity {
         setTeamBView.setText(String.valueOf(setTeamB));
     }
 
-    public void displayForFoulA(boolean foulColor){
+    public void displayForFoulA(boolean foulColor) {
         TextView setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.red));
+    }
+
+    private void displayForFoulAWhite(boolean foulCount) {
+        TextView setFoulA = (TextView) findViewById(R.id.set_a_foul);
+        setFoulA.setTextColor(this.getResources().getColor(R.color.white));
+    }
+
+    public void displayForFoulB(boolean foulColor) {
+        TextView setFoulA = (TextView) findViewById(R.id.set_a_foulb);
+        setFoulA.setTextColor(this.getResources().getColor(R.color.red));
+    }
+
+    private void displayForFoulBWhite(boolean foulCount) {
+        TextView setFoulA = (TextView) findViewById(R.id.set_a_foulb);
+        setFoulA.setTextColor(this.getResources().getColor(R.color.white));
     }
 
     // The 'plus' method increases the score for Team A appropriately and checks if Team A already won the game
@@ -62,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             displayForTeamA(scoreTeamA);
             displayForTeamB(scoreTeamB);
             displayForSetB(setTeamB);
-        } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB)<=1) ) {
+        } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB) <= 1)) {
             scoreTeamA = scoreTeamA + 1;
             displayForTeamA(scoreTeamA);
         }
@@ -86,26 +104,85 @@ public class MainActivity extends AppCompatActivity {
             displayForTeamA(scoreTeamA);
             displayForTeamB(scoreTeamB);
             displayForSetA(setTeamA);
-        }  else if (scoreTeamB < 11 || ((scoreTeamB-scoreTeamA) <= 1 )) {
+        } else if (scoreTeamB < 11 || ((scoreTeamB - scoreTeamA) <= 1)) {
             scoreTeamB = scoreTeamB + 1;
             displayForTeamB(scoreTeamB);
         }
     }
 
-    public void reset(View view){
+    //Reset button functionality
+    public void reset(View view) {
         scoreTeamA = 0;
         scoreTeamB = 0;
         setTeamA = 0;
         setTeamB = 0;
+        foulCounter = 0;
+        foulCounterB = 0;
 
         displayForTeamA(scoreTeamA);
         displayForTeamB(scoreTeamB);
         displayForSetA(setTeamA);
         displayForSetB(setTeamB);
+        displayForFoulAWhite(true);
+        displayForFoulBWhite(true);
     }
 
-    public void foula(View view){
-        boolean foulColor = true;
-        displayForFoulA(foulColor);
+    //Foul button functionality for Player A
+    public void foula(View view) {
+        if (foulCounter == 0) {
+            foulCounter = foulCounter + 1;
+            displayForFoulA(true);
+        } else if (foulCounter > 0) {
+            displayForFoulAWhite(true);
+            foulCounter = 0;
+            if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
+                scoreTeamA = 0;
+                scoreTeamB = 0;
+                setTeamB = setTeamB + 1;
+                displayForTeamA(scoreTeamA);
+                displayForTeamB(scoreTeamB);
+                displayForSetB(setTeamB);
+            } else if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
+                scoreTeamA = 0;
+                scoreTeamB = 0;
+                setTeamA = setTeamA + 1;
+                displayForTeamA(scoreTeamA);
+                displayForTeamB(scoreTeamB);
+                displayForSetA(setTeamA);
+            } else if (scoreTeamB < 11 || ((scoreTeamB - scoreTeamA) <= 1)) {
+                scoreTeamB = scoreTeamB + 1;
+                displayForTeamB(scoreTeamB);
+            }
+        }
     }
+
+    //Foul button functionality for Player B
+    public void foulb(View view) {
+        if (foulCounterB == 0) {
+            foulCounterB = foulCounterB + 1;
+            displayForFoulB(true);
+        } else if (foulCounterB > 0) {
+            displayForFoulBWhite(true);
+            foulCounterB = 0;
+            if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
+                scoreTeamA = 0;
+                scoreTeamB = 0;
+                setTeamA = setTeamA + 1;
+                displayForTeamA(scoreTeamA);
+                displayForTeamB(scoreTeamB);
+                displayForSetA(setTeamA);
+            } else if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
+                scoreTeamA = 0;
+                scoreTeamB = 0;
+                setTeamB = setTeamB + 1;
+                displayForTeamA(scoreTeamA);
+                displayForTeamB(scoreTeamB);
+                displayForSetB(setTeamB);
+            } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB) <= 1)) {
+                scoreTeamA = scoreTeamA + 1;
+                displayForTeamA(scoreTeamA);
+            }
+        }
+    }
+
 }
