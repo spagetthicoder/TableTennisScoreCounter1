@@ -9,8 +9,8 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    int scoreTeamA = 0;
-    int scoreTeamB = 0;
+    int scorePlayerA = 0;
+    int scorePlayerB = 0;
     int setTeamA = 0;
     int setTeamB = 0;
     int foulCounter = 0;
@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void displayForTeamA(int scoreTeamA) {
-        TextView scoreTeamAView = (TextView) findViewById(R.id.team_a_score);
+    public void displayForPlayerA(int scoreTeamA) {
+        TextView scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
         scoreTeamAView.setText(String.valueOf(scoreTeamA));
     }
 
-    public void displayForTeamB(int scoreTeamB) {
-        TextView scoreTeamBView = (TextView) findViewById(R.id.team_b_score);
+    public void displayForPlayerB(int scoreTeamB) {
+        TextView scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
         scoreTeamBView.setText(String.valueOf(scoreTeamB));
     }
 
@@ -66,23 +66,23 @@ public class MainActivity extends AppCompatActivity {
     // The 'plus' method increases the score for Team A appropriately and checks if Team A already won the game
     // If Team A won the game the game points for Team A and Team B are reset to 0 and Set value for Team A increased with 1
     public void plus(View view) {
-        if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
-            scoreTeamA = 0;
-            scoreTeamB = 0;
+        if (scorePlayerA >= 11 && (scorePlayerA - scorePlayerB) >= 2) {
+            scorePlayerA = 0;
+            scorePlayerB = 0;
             setTeamA = setTeamA + 1;
-            displayForTeamA(scoreTeamA);
-            displayForTeamB(scoreTeamB);
+            displayForPlayerA(scorePlayerA);
+            displayForPlayerB(scorePlayerB);
             displayForSetA(setTeamA);
-        } else if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
-            scoreTeamA = 0;
-            scoreTeamB = 0;
+        } else if (scorePlayerB >= 11 && (scorePlayerB - scorePlayerA) >= 2) {
+            scorePlayerA = 0;
+            scorePlayerB = 0;
             setTeamB = setTeamB + 1;
-            displayForTeamA(scoreTeamA);
-            displayForTeamB(scoreTeamB);
+            displayForPlayerA(scorePlayerA);
+            displayForPlayerB(scorePlayerB);
             displayForSetB(setTeamB);
-        } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB) <= 1)) {
-            scoreTeamA = scoreTeamA + 1;
-            displayForTeamA(scoreTeamA);
+        } else if (scorePlayerA < 11 || ((scorePlayerA - scorePlayerB) <= 1)) {
+            scorePlayerA = scorePlayerA + 1;
+            displayForPlayerA(scorePlayerA);
         }
     }
 
@@ -90,37 +90,37 @@ public class MainActivity extends AppCompatActivity {
     // The 'plusb' method increases the score for Team B and checks if Team B already won the game
     // If Team A won the game the game points for Team A and Team B are reset to 0 and Set value for Team B increased with 1
     public void plusb(View view) {
-        if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
-            scoreTeamA = 0;
-            scoreTeamB = 0;
+        if (scorePlayerB >= 11 && (scorePlayerB - scorePlayerA) >= 2) {
+            scorePlayerA = 0;
+            scorePlayerB = 0;
             setTeamB = setTeamB + 1;
-            displayForTeamA(scoreTeamA);
-            displayForTeamB(scoreTeamB);
+            displayForPlayerA(scorePlayerA);
+            displayForPlayerB(scorePlayerB);
             displayForSetB(setTeamB);
-        } else if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
-            scoreTeamA = 0;
-            scoreTeamB = 0;
+        } else if (scorePlayerA >= 11 && (scorePlayerA - scorePlayerB) >= 2) {
+            scorePlayerA = 0;
+            scorePlayerB = 0;
             setTeamA = setTeamA + 1;
-            displayForTeamA(scoreTeamA);
-            displayForTeamB(scoreTeamB);
+            displayForPlayerA(scorePlayerA);
+            displayForPlayerB(scorePlayerB);
             displayForSetA(setTeamA);
-        } else if (scoreTeamB < 11 || ((scoreTeamB - scoreTeamA) <= 1)) {
-            scoreTeamB = scoreTeamB + 1;
-            displayForTeamB(scoreTeamB);
+        } else if (scorePlayerB < 11 || ((scorePlayerB - scorePlayerA) <= 1)) {
+            scorePlayerB = scorePlayerB + 1;
+            displayForPlayerB(scorePlayerB);
         }
     }
 
     //Reset button functionality
     public void reset(View view) {
-        scoreTeamA = 0;
-        scoreTeamB = 0;
+        scorePlayerA = 0;
+        scorePlayerB = 0;
         setTeamA = 0;
         setTeamB = 0;
         foulCounter = 0;
         foulCounterB = 0;
 
-        displayForTeamA(scoreTeamA);
-        displayForTeamB(scoreTeamB);
+        displayForPlayerA(scorePlayerA);
+        displayForPlayerB(scorePlayerB);
         displayForSetA(setTeamA);
         displayForSetB(setTeamB);
         displayForFoulAWhite(true);
@@ -135,23 +135,23 @@ public class MainActivity extends AppCompatActivity {
         } else if (foulCounter > 0) {
             displayForFoulAWhite(true);
             foulCounter = 0;
-            if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
-                scoreTeamA = 0;
-                scoreTeamB = 0;
+            if (scorePlayerB >= 11 && (scorePlayerB - scorePlayerA) >= 2) {
+                scorePlayerA = 0;
+                scorePlayerB = 0;
                 setTeamB = setTeamB + 1;
-                displayForTeamA(scoreTeamA);
-                displayForTeamB(scoreTeamB);
+                displayForPlayerA(scorePlayerA);
+                displayForPlayerB(scorePlayerB);
                 displayForSetB(setTeamB);
-            } else if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
-                scoreTeamA = 0;
-                scoreTeamB = 0;
+            } else if (scorePlayerA >= 11 && (scorePlayerA - scorePlayerB) >= 2) {
+                scorePlayerA = 0;
+                scorePlayerB = 0;
                 setTeamA = setTeamA + 1;
-                displayForTeamA(scoreTeamA);
-                displayForTeamB(scoreTeamB);
+                displayForPlayerA(scorePlayerA);
+                displayForPlayerB(scorePlayerB);
                 displayForSetA(setTeamA);
-            } else if (scoreTeamB < 11 || ((scoreTeamB - scoreTeamA) <= 1)) {
-                scoreTeamB = scoreTeamB + 1;
-                displayForTeamB(scoreTeamB);
+            } else if (scorePlayerB < 11 || ((scorePlayerB - scorePlayerA) <= 1)) {
+                scorePlayerB = scorePlayerB + 1;
+                displayForPlayerB(scorePlayerB);
             }
         }
     }
@@ -164,23 +164,23 @@ public class MainActivity extends AppCompatActivity {
         } else if (foulCounterB > 0) {
             displayForFoulBWhite(true);
             foulCounterB = 0;
-            if (scoreTeamA >= 11 && (scoreTeamA - scoreTeamB) >= 2) {
-                scoreTeamA = 0;
-                scoreTeamB = 0;
+            if (scorePlayerA >= 11 && (scorePlayerA - scorePlayerB) >= 2) {
+                scorePlayerA = 0;
+                scorePlayerB = 0;
                 setTeamA = setTeamA + 1;
-                displayForTeamA(scoreTeamA);
-                displayForTeamB(scoreTeamB);
+                displayForPlayerA(scorePlayerA);
+                displayForPlayerB(scorePlayerB);
                 displayForSetA(setTeamA);
-            } else if (scoreTeamB >= 11 && (scoreTeamB - scoreTeamA) >= 2) {
-                scoreTeamA = 0;
-                scoreTeamB = 0;
+            } else if (scorePlayerB >= 11 && (scorePlayerB - scorePlayerA) >= 2) {
+                scorePlayerA = 0;
+                scorePlayerB = 0;
                 setTeamB = setTeamB + 1;
-                displayForTeamA(scoreTeamA);
-                displayForTeamB(scoreTeamB);
+                displayForPlayerA(scorePlayerA);
+                displayForPlayerB(scorePlayerB);
                 displayForSetB(setTeamB);
-            } else if (scoreTeamA < 11 || ((scoreTeamA - scoreTeamB) <= 1)) {
-                scoreTeamA = scoreTeamA + 1;
-                displayForTeamA(scoreTeamA);
+            } else if (scorePlayerA < 11 || ((scorePlayerA - scorePlayerB) <= 1)) {
+                scorePlayerA = scorePlayerA + 1;
+                displayForPlayerA(scorePlayerA);
             }
         }
     }
