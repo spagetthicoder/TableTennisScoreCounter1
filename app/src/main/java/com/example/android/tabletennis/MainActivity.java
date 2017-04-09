@@ -16,51 +16,91 @@ public class MainActivity extends AppCompatActivity {
     int foulCounter = 0;
     int foulCounterB = 0;
 
+    private TextView scoreTeamAView;
+    private TextView scoreTeamBView;
+    private TextView setTeamAView;
+    private TextView setTeamBView;
+    private TextView setFoulA;
+    private TextView setFoulB;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(savedInstanceState != null){
+            scorePlayerA = savedInstanceState.getInt("SCORE_TEAM_A");
+            scorePlayerB = savedInstanceState.getInt("SCORE_TEAM_B");
+            setTeamA = savedInstanceState.getInt("SET_TEAM_A");
+            setTeamB = savedInstanceState.getInt("SET_TEAM_B");
+        }
+
         setContentView(R.layout.activity_main);
+
+        scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
+        scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
+        setTeamAView = (TextView) findViewById(R.id.sets_a_score);
+        setTeamBView = (TextView) findViewById(R.id.sets_b_score);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt("SCORE_TEAM_A", scorePlayerA);
+        outState.putInt("SCORE_TEAM_B", scorePlayerB);
+        outState.putInt("SET_TEAM_A", setTeamA);
+        outState.putInt("SET_TEAM_B", setTeamB);
+
+        // call superclass to save any view hierarchy
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        scoreTeamAView.setText(String.valueOf(savedInstanceState.getInt("SCORE_TEAM_A")));
+        scoreTeamBView.setText(String.valueOf(savedInstanceState.getInt("SCORE_TEAM_B")));
+        setTeamAView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_A")));
+        setTeamBView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_B")));
+  }
+
     public void displayForPlayerA(int scoreTeamA) {
-        TextView scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
+        scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
         scoreTeamAView.setText(String.valueOf(scoreTeamA));
     }
 
     public void displayForPlayerB(int scoreTeamB) {
-        TextView scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
+        scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
         scoreTeamBView.setText(String.valueOf(scoreTeamB));
     }
 
     public void displayForSetA(int setTeamA) {
-        TextView setTeamAView = (TextView) findViewById(R.id.sets_a_score);
+        setTeamAView = (TextView) findViewById(R.id.sets_a_score);
         setTeamAView.setText(String.valueOf(setTeamA));
     }
 
     public void displayForSetB(int setTeamB) {
-        TextView setTeamBView = (TextView) findViewById(R.id.sets_b_score);
+        setTeamBView = (TextView) findViewById(R.id.sets_b_score);
         setTeamBView.setText(String.valueOf(setTeamB));
     }
 
     public void displayForFoulA(boolean foulColor) {
-        TextView setFoulA = (TextView) findViewById(R.id.set_a_foul);
+        setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.red));
     }
 
-    private void displayForFoulAWhite(boolean foulCount) {
-        TextView setFoulA = (TextView) findViewById(R.id.set_a_foul);
+    private void displayForFoulAWhite() {
+        setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.white));
     }
 
     public void displayForFoulB(boolean foulColor) {
-        TextView setFoulA = (TextView) findViewById(R.id.set_a_foulb);
-        setFoulA.setTextColor(this.getResources().getColor(R.color.red));
+        setFoulB = (TextView) findViewById(R.id.set_a_foulb);
+        setFoulB.setTextColor(this.getResources().getColor(R.color.red));
     }
 
-    private void displayForFoulBWhite(boolean foulCount) {
-        TextView setFoulA = (TextView) findViewById(R.id.set_a_foulb);
-        setFoulA.setTextColor(this.getResources().getColor(R.color.white));
+    private void displayForFoulBWhite() {
+        setFoulB = (TextView) findViewById(R.id.set_a_foulb);
+        setFoulB.setTextColor(this.getResources().getColor(R.color.white));
     }
 
     // The 'plus' method increases the score for Team A appropriately and checks if Team A already won the game
@@ -123,8 +163,8 @@ public class MainActivity extends AppCompatActivity {
         displayForPlayerB(scorePlayerB);
         displayForSetA(setTeamA);
         displayForSetB(setTeamB);
-        displayForFoulAWhite(true);
-        displayForFoulBWhite(true);
+        displayForFoulAWhite();
+        displayForFoulBWhite();
     }
 
     //Foul button functionality for Player A
@@ -133,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             foulCounter = foulCounter + 1;
             displayForFoulA(true);
         } else if (foulCounter > 0) {
-            displayForFoulAWhite(true);
+            displayForFoulAWhite();
             foulCounter = 0;
             if (scorePlayerB >= 11 && (scorePlayerB - scorePlayerA) >= 2) {
                 scorePlayerA = 0;
@@ -162,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             foulCounterB = foulCounterB + 1;
             displayForFoulB(true);
         } else if (foulCounterB > 0) {
-            displayForFoulBWhite(true);
+            displayForFoulBWhite();
             foulCounterB = 0;
             if (scorePlayerA >= 11 && (scorePlayerA - scorePlayerB) >= 2) {
                 scorePlayerA = 0;
