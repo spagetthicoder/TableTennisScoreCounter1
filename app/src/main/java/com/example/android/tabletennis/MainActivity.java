@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
         setTeamAView = (TextView) findViewById(R.id.sets_a_score);
         setTeamBView = (TextView) findViewById(R.id.sets_b_score);
+        setFoulA = (TextView) findViewById(R.id.set_a_foul);
+        setFoulB = (TextView) findViewById(R.id.set_a_foulb);
 
     }
 
@@ -112,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     public void displayForFoulA() {
         setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.red));
+        setFoulA.setText(String.valueOf(foulCounter));
     }
 
     //Method for hiding Foul for Player A
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
     public void displayForFoulB() {
         setFoulB = (TextView) findViewById(R.id.set_a_foulb);
         setFoulB.setTextColor(this.getResources().getColor(R.color.red));
+        setFoulB.setText(String.valueOf(foulCounterB));
     }
 
     //Method for hiding Foul for Player B
