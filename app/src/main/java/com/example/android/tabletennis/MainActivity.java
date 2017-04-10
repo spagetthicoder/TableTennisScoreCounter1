@@ -61,43 +61,52 @@ public class MainActivity extends AppCompatActivity {
         scoreTeamBView.setText(String.valueOf(savedInstanceState.getInt("SCORE_TEAM_B")));
         setTeamAView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_A")));
         setTeamBView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_B")));
+
   }
 
+    //Method for displaying the Score for Player A
     public void displayForPlayerA(int scoreTeamA) {
         scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
         scoreTeamAView.setText(String.valueOf(scoreTeamA));
     }
 
+    //Method for displaying the Score for Player B
     public void displayForPlayerB(int scoreTeamB) {
         scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
         scoreTeamBView.setText(String.valueOf(scoreTeamB));
     }
 
+    //Method for displaying the Sets for Player A
     public void displayForSetA(int setTeamA) {
         setTeamAView = (TextView) findViewById(R.id.sets_a_score);
         setTeamAView.setText(String.valueOf(setTeamA));
     }
 
+    //Method for displaying the Sets for Player B
     public void displayForSetB(int setTeamB) {
         setTeamBView = (TextView) findViewById(R.id.sets_b_score);
         setTeamBView.setText(String.valueOf(setTeamB));
     }
 
-    public void displayForFoulA(boolean foulColor) {
+    //Method for displaying Foul for Player A
+    public void displayForFoulA() {
         setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.red));
     }
 
+    //Method for hiding Foul for Player A
     private void displayForFoulAWhite() {
         setFoulA = (TextView) findViewById(R.id.set_a_foul);
         setFoulA.setTextColor(this.getResources().getColor(R.color.white));
     }
 
-    public void displayForFoulB(boolean foulColor) {
+    //Method for displaying Foul for Player B
+    public void displayForFoulB() {
         setFoulB = (TextView) findViewById(R.id.set_a_foulb);
         setFoulB.setTextColor(this.getResources().getColor(R.color.red));
     }
 
+    //Method for hiding Foul for Player A
     private void displayForFoulBWhite() {
         setFoulB = (TextView) findViewById(R.id.set_a_foulb);
         setFoulB.setTextColor(this.getResources().getColor(R.color.white));
@@ -171,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     public void foula(View view) {
         if (foulCounter == 0) {
             foulCounter = foulCounter + 1;
-            displayForFoulA(true);
+            displayForFoulA();
         } else if (foulCounter > 0) {
             displayForFoulAWhite();
             foulCounter = 0;
@@ -200,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
     public void foulb(View view) {
         if (foulCounterB == 0) {
             foulCounterB = foulCounterB + 1;
-            displayForFoulB(true);
+            displayForFoulB();
         } else if (foulCounterB > 0) {
             displayForFoulBWhite();
             foulCounterB = 0;
