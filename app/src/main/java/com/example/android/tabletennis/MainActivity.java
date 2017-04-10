@@ -24,24 +24,39 @@ public class MainActivity extends AppCompatActivity {
     private TextView setFoulB;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             scorePlayerA = savedInstanceState.getInt("SCORE_TEAM_A");
             scorePlayerB = savedInstanceState.getInt("SCORE_TEAM_B");
             setTeamA = savedInstanceState.getInt("SET_TEAM_A");
             setTeamB = savedInstanceState.getInt("SET_TEAM_B");
-        }
+            foulCounter = savedInstanceState.getInt("SET_FOUL_A");
+            foulCounterB = savedInstanceState.getInt("SET_FOUL_B");
 
-        setContentView(R.layout.activity_main);
+            if (foulCounter == 1) {
+                displayForFoulA();
+            } else {
+                displayForFoulAWhite();
+            }
+
+            if (foulCounterB == 1) {
+                displayForFoulB();
+            } else {
+                displayForFoulBWhite();
+            }
+
+
+        }
 
         scoreTeamAView = (TextView) findViewById(R.id.player_a_score);
         scoreTeamBView = (TextView) findViewById(R.id.player_b_score);
         setTeamAView = (TextView) findViewById(R.id.sets_a_score);
         setTeamBView = (TextView) findViewById(R.id.sets_b_score);
+
     }
 
     @Override
@@ -50,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("SCORE_TEAM_B", scorePlayerB);
         outState.putInt("SET_TEAM_A", setTeamA);
         outState.putInt("SET_TEAM_B", setTeamB);
+
+        outState.putInt("SET_FOUL_A", foulCounter);
+        outState.putInt("SET_FOUL_B", foulCounterB);
 
         // call superclass to save any view hierarchy
         super.onSaveInstanceState(outState);
@@ -62,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         setTeamAView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_A")));
         setTeamBView.setText(String.valueOf(savedInstanceState.getInt("SET_TEAM_B")));
 
-  }
+        setFoulA.setText(String.valueOf(savedInstanceState.getInt("SET_FOUL_A")));
+        setFoulB.setText(String.valueOf(savedInstanceState.getInt("SET_FOUL_B")));
+    }
 
     //Method for displaying the Score for Player A
     public void displayForPlayerA(int scoreTeamA) {
@@ -106,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         setFoulB.setTextColor(this.getResources().getColor(R.color.red));
     }
 
-    //Method for hiding Foul for Player A
+    //Method for hiding Foul for Player B
     private void displayForFoulBWhite() {
         setFoulB = (TextView) findViewById(R.id.set_a_foulb);
         setFoulB.setTextColor(this.getResources().getColor(R.color.white));
